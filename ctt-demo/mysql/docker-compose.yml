@@ -1,0 +1,38 @@
+# services:
+#   mysql:
+#     image: mysql:latest
+#     container_name: mysql-container
+#     environment:
+#       MYSQL_ROOT_PASSWORD: my-secret-pw
+#       # uncomment below if you want to automatically create and select a database
+#       # MYSQL_DATABASE: my_database
+#     ports:
+#       - "3306:3306"
+#     volumes:
+#       - mysql-data:/var/lib/mysql
+
+# volumes:
+#   mysql-data:
+
+version: '3.8'
+
+services:
+  mysql-service:
+    image: mysql:8
+    container_name: mysql_db
+    environment:
+      MYSQL_ROOT_PASSWORD: admin
+      MYSQL_DATABASE: mydb
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+
+  adminer-service:
+    image: adminer
+    container_name: adminer_ui
+    ports:
+      - "8080:8080"  # Open browser at http://localhost:8080
+
+volumes:
+  mysql-data:
