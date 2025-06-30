@@ -22,7 +22,7 @@ public class AddressController {
 
     @GetMapping(path="/{addressId}")
     public AddressResponse getAddress (@PathVariable long addressId) {
-        return addressService.getById(addressId);
+        return addressService.getAddressById(addressId);
     }
 
     @PostMapping(path="/create", consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })

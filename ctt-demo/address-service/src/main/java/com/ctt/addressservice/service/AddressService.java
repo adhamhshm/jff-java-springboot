@@ -29,7 +29,7 @@ public class AddressService {
         return new AddressResponse(address);
     }
 
-    public AddressResponse getById (long id) {
+    public AddressResponse getAddressById (long id) {
         
         logger.info("Id is: " + id);
 
