@@ -53,7 +53,7 @@ public class StudentService {
 
     }
 
-    // example use of feign client
+    // example use of webclient client
     public AddressResponse getAddressById (long addressId) {
         Mono<AddressResponse> addressResponse = webClient.get().uri("/" + addressId)
             .retrieve().bodyToMono(AddressResponse.class);

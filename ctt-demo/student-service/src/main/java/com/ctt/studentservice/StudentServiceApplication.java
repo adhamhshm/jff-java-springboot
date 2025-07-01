@@ -9,6 +9,7 @@ import org.springframework.web.reactive.function.client.WebClient;
 
 @SpringBootApplication
 @EnableFeignClients // this is added to use feign client, need to add dependency first
+// @EnableEurekaClient annotation is not required in latest spring versions. Simply adding spring-cloud-starter-netflix-eureka-client to dependencies will enable the client.
 public class StudentServiceApplication {
 
 	// to be used with the web client
