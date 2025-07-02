@@ -1,5 +1,6 @@
 package com.ctt.addressservice.controller;
 
+import org.springframework.core.env.Environment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,6 +19,9 @@ import com.ctt.addressservice.service.AddressService;
 public class AddressController {
 
     @Autowired
+    private Environment env;
+
+    @Autowired
     AddressService addressService;
 
     @GetMapping(path="/{addressId}")
@@ -28,5 +32,10 @@ public class AddressController {
     @PostMapping(path="/create", consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
     public AddressResponse createAddress (@RequestBody CreateAddressRequest createAddressRequest) {
         return addressService.createAddress(createAddressRequest);
+    }
+
+    @GetMapping("/status")
+    public String status() {
+        return "Get status API users is working on port " + env.getProperty("local.server.port");
     }
 }
