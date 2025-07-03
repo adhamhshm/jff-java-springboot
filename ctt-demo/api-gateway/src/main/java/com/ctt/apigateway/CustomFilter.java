@@ -31,4 +31,18 @@ public class CustomFilter implements GlobalFilter {
             logger.info("Post Filter: {}", response.getStatusCode());
         }));
     }
+
+//    @Override
+//    public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
+//        return Mono.defer(() -> {
+//            ServerHttpRequest request = exchange.getRequest();
+//            logger.info("Authorization Header: {}", request.getHeaders().getFirst("Authorization"));
+//
+//            return chain.filter(exchange)
+//                    .doOnSuccess(v -> {
+//                        ServerHttpResponse response = exchange.getResponse();
+//                        logger.info("Post Filter: {}", response.getStatusCode());
+//                    });
+//        });
+//    }
 }

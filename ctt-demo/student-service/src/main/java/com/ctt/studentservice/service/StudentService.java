@@ -1,6 +1,8 @@
 package com.ctt.studentservice.service;
 
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -16,6 +18,8 @@ import reactor.core.publisher.Mono;
 
 @Service
 public class StudentService {
+
+    Logger logger = LoggerFactory.getLogger(StudentService.class);
 
     @Autowired
     StudentRepository studentRepository;
@@ -46,6 +50,9 @@ public class StudentService {
     }
 
     public StudentResponse getStudentById(long userId) {
+
+        logger.info("Entering getStudentById method...");
+
         Student student = studentRepository.findById(userId).get();
 
         StudentResponse studentResponse = new StudentResponse(student);

@@ -1,5 +1,7 @@
 package com.ctt.addressservice.controller;
 
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.core.env.Environment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -16,6 +18,7 @@ import com.ctt.addressservice.service.AddressService;
 
 @RestController
 @RequestMapping("/api/address")
+@RefreshScope
 public class AddressController {
 
     @Autowired
@@ -23,6 +26,9 @@ public class AddressController {
 
     @Autowired
     AddressService addressService;
+
+    @Value("${address.test}")
+    private String testValue;
 
     @GetMapping(path="/{addressId}")
     public AddressResponse getAddress (@PathVariable long addressId) {
@@ -34,8 +40,11 @@ public class AddressController {
         return addressService.createAddress(createAddressRequest);
     }
 
-    @GetMapping("/status")
-    public String status() {
-        return "Get status API users is working on port " + env.getProperty("local.server.port");
+    // changing in config server will reflect instantly, but for microservices, need to restart manually for properties changes
+    // the workaround, with actuator, need to add "refresh" endpoints in bootstrap.properties, add @RefreshScope in class
+    // use POST http://localhost:[port]/actuator/refresh
+    @GetMapping("/test")
+    public String test () {
+        return testValue;
     }
 }

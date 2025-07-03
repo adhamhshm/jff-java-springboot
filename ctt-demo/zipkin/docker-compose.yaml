@@ -1,0 +1,6 @@
+services:
+  zipkin-service:
+    image: openzipkin/zipkin
+    container_name: zipkin-service-container
+    ports:
+      - "9411:9411"
